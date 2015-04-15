@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>COUNL</Machine>
+    <WindowsUser>coun</WindowsUser>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>c24b06be-c5f1-49d5-89e1-43059d1c2ca0</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\AntsaWeatherApp.exe">
+      <PackagePath>AntsaWeatherApp.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\Logo.scale-240.png">
+      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\SmallLogo.scale-240.png">
+      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\SplashScreen.scale-240.png">
+      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\StoreLogo.scale-240.png">
+      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\Assets\WideLogo.scale-240.png">
+      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\AntsaWeatherApp.xr.xml">
+      <PackagePath>AntsaWeatherApp.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\coun\Documents\Visual Studio 2013\Projects\ExerciseOne\AntsaWeatherApp\AntsaWeatherApp\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
