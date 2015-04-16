@@ -15,6 +15,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace AntsaWeatherApp
@@ -22,6 +26,9 @@ namespace AntsaWeatherApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+
+    
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -29,8 +36,22 @@ namespace AntsaWeatherApp
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
+
         }
 
+
+         void App_Suspending(Object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Suspending starts");
+             saveDataOnSuspension(e);
+        }
+
+        private void saveDataOnSuspension(SuspendingEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Saving data on suspension.. nothing interesting to save");
+            
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -38,13 +59,8 @@ namespace AntsaWeatherApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+            System.Diagnostics.Debug.WriteLine("On navigated to");
+           
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -57,57 +73,76 @@ namespace AntsaWeatherApp
 
         }
 
+   
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            System.Diagnostics.Debug.WriteLine("Given city " + CityTextBox.Text.Trim());           
-            this.QueryGrid.Visibility = Visibility.Collapsed;
-            this.ProcessingGrid.Visibility = Visibility.Visible;
-            this.ResultGrid.Visibility = Visibility.Collapsed;
-            await fetchWeatherForecastData(CityTextBox.Text.Trim(),processData);
+            string city=CityTextBox.Text.Trim();
+            if (city.Length > 0) {
+                this.QueryGrid.Visibility = Visibility.Collapsed;
+                this.ProcessingGrid.Visibility = Visibility.Visible;
+                this.ResultGrid.Visibility = Visibility.Collapsed;
+                this.ErrorText.Visibility = Visibility.Collapsed;
+                await fetchWeatherForecastData(city,processData);
+            }
             System.Diagnostics.Debug.WriteLine("button method done");
          
         }
 
         public void processData(string jsonData)
         {
-            System.Diagnostics.Debug.WriteLine("processing data starts");
-            this.QueryGrid.Visibility = Visibility.Visible;
-            this.ProcessingGrid.Visibility = Visibility.Collapsed;
-            this.ResultGrid.Visibility = Visibility.Visible;
+                  
             System.Diagnostics.Debug.WriteLine("PROCESS JSON DATA"+jsonData);
-           AntsaWeatherApp.WeatherData w= Deserialize<AntsaWeatherApp.WeatherData>(jsonData);
-           System.Diagnostics.Debug.WriteLine("Object created from data "+w);
+            try
+            {
+                AntsaWeatherApp.WeatherData w = Deserialize<AntsaWeatherApp.WeatherData>(jsonData);
+                System.Diagnostics.Debug.WriteLine("Object created from data " + w);
+                this.Country.Text = "Country: " + w.query.results.channel.location.country;
+                this.City.Text = "City: " + w.query.results.channel.location.city;
+                this.Temperature.Text="Temperature: "+w.query.results.channel.item.condition.temp+"c"; //celsius added to query
+                this.Sunrise.Text = "Sunrise: " + w.query.results.channel.astronomy.sunrise;
+                this.Sunset.Text = "Sunset: " + w.query.results.channel.astronomy.sunset;
+                this.CityTextBox.Text = "";
+                this.QueryGrid.Visibility = Visibility.Visible;
+                this.ProcessingGrid.Visibility = Visibility.Collapsed;
+                this.ResultGrid.Visibility = Visibility.Visible;
+               
+            }
+            catch (Exception e)
+            {
+                this.ErrorText.Text = "Error:" + e.Message;
+                this.ErrorText.Visibility = Visibility.Visible;
+            }
+          
         }
 
         private async Task<string> fetchWeatherForecastData(string city,Action<string>callback)
-        {
-            System.Diagnostics.Debug.WriteLine("Setting delay for gui to test gui with async button");
-            //await Task.Delay(9000);
-            System.Diagnostics.Debug.WriteLine("delay passed, if clicked button check from logs");
+         {
+            //System.Diagnostics.Debug.WriteLine("Setting delay for gui to test gui with async button");
+            //await Task.Delay(9000);           
             try
             {
                 //Create HttpClient
-                Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();
-                //Define Http Headers  select * from weather.forecast where woeid=helsinki
+                Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();                
                 httpClient.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
-                String weatherQueryUri = "http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text=\"" + city+"\"";
-                System.Diagnostics.Debug.WriteLine("Fetching data starts from URI " + weatherQueryUri);
-              String res=await httpClient.GetStringAsync(new Uri(weatherQueryUri));
-              callback(res);
-                         
+                //Combined and encoded YQL query -> search WOEID for city and fetch weather data
+                String encodedYqlQuery = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20u%20%3D%20%27c%27%20and%20woeid%20in%20(select%20woeid%20from%20geo.places(0%2C1)%20where%20text%3D%22"+city+"%22)";
+                System.Diagnostics.Debug.WriteLine("Weather webService uri/ YQL " + encodedYqlQuery);
+                //Fire the query
+                String res=await httpClient.GetStringAsync(new Uri(encodedYqlQuery));
+                //And call the callback method after returning
+                callback(res);                         
             }
 
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("ERROR "+ex);
-                
+                System.Diagnostics.Debug.WriteLine("ERROR "+ex);                
             }
             return "error fetchingData";  
         }
 
     
-
+        //From course material
          public static string Serialize(object obj)
         {
             if (obj == null)
@@ -135,12 +170,7 @@ namespace AntsaWeatherApp
 
         }
 
-        /// <summary>
-        /// Parses json string to object instance
-        /// </summary>
-        /// <typeparam name="T">type of the object</typeparam>
-        /// <param name="json">json string representation of the object</param>
-        /// <returns>Deserialized object instance</returns>
+      //From course material
         public static T Deserialize<T>(string json)
         {
             DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(T));

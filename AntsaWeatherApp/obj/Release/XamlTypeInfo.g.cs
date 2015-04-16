@@ -529,4 +529,3 @@ namespace AntsaWeatherApp.AntsaWeatherApp_XamlTypeInfo
 }
 
 
-

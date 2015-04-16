@@ -85,7 +85,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Astronomy.cs" />
     <Compile Include="Channel.cs" />
+    <Compile Include="Condition.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

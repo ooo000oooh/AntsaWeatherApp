@@ -11,16 +11,24 @@
     <StackPanel x:Name="StackPanel">
         <Grid x:Name="RootGrid">
             <Grid x:Name="QueryGrid" Margin="0,0,0,-162">
-                <TextBox x:Name="CityTextBox"  PlaceholderText="City name" HorizontalAlignment="Left" Margin="101,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"  Text="helsinki"/>
-                <Button x:ConnectionId='2' Content="Check weather" HorizontalAlignment="Left" Margin="101,82,0,0" VerticalAlignment="Top" Width="199"                     />
+                <TextBox x:Name="CityTextBox"  PlaceholderText="City name" HorizontalAlignment="Left" Margin="59,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="306"  Text="helsinki"/>
+                <Button x:ConnectionId='2' Content="Check weather" HorizontalAlignment="Left" Margin="101,95,0,0" VerticalAlignment="Top" Width="199"                     />
             </Grid>
-            <Grid x:Name="ProcessingGrid" Visibility="Visible" Margin="0,100,0,0">
+            <Grid x:Name="ProcessingGrid" Visibility="Collapsed" Margin="0,100,0,0">
                 <TextBlock x:Name="Processing" Text="Processing" HorizontalAlignment="Left" Margin="101,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
                 <Button x:ConnectionId='1' Content="Verify async" HorizontalAlignment="Left" Margin="101,82,0,0" VerticalAlignment="Top" Width="199"                        />
             </Grid>
 
             <Grid x:Name="ResultGrid" Visibility="Collapsed"  Margin="0,200,0,0">
-                <TextBlock x:Name="Temperature" Text="Temperature" HorizontalAlignment="Left" Margin="101,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
+                <TextBlock x:Name="Country" Text="Country" HorizontalAlignment="Left" Margin="101,-20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
+                <TextBlock x:Name="City" Text="City" HorizontalAlignment="Left" Margin="101,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
+                <TextBlock x:Name="Temperature" Text="Temperature" HorizontalAlignment="Left" Margin="101,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
+                <TextBlock x:Name="Sunrise" Text="Sunrise" HorizontalAlignment="Left" Margin="101,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
+                <TextBlock x:Name="Sunset" Text="Sunset" HorizontalAlignment="Left" Margin="101,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" />
+            </Grid>
+            <Grid x:Name="ErrorGrid" Visibility="Collapsed"  Margin="0,200,0,0">
+                <TextBlock x:Name="ErrorText" Text="Error happened try again" HorizontalAlignment="Left" Margin="101,-20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
+
             </Grid>
         </Grid>
     </StackPanel>

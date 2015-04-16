@@ -10,15 +10,20 @@ namespace AntsaWeatherApp
     class Channel
     {
         [DataMember]
-        private AntsaWeatherApp.Location location { get; set; }
-        [DataMember]
-        private AntsaWeatherApp.Units country { get; set; }
+         public AntsaWeatherApp.Location location {  get; set; }
+       
         [DataMember]
         public string title { get; set; }
+        [DataMember]
+        public AntsaWeatherApp.Astronomy astronomy { get; set; }
+
+        [DataMember]
+        public AntsaWeatherApp.Item item {get;set;}
+
 
         public override string ToString()
         {
-            return "Channel:" + location + "  title " + title;
+            return "Channel:" + location + "  title " + title+ " astronomy:"+astronomy;
         }
     }
 }
